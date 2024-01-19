@@ -1,10 +1,8 @@
-package estore.services.interfaces.src.core.services;
+package src.core.services;
 
-import estore.services.interfaces.src.core.data.Cart;
-import estorePojo.exceptions.InsufficientBalanceException;
-import estorePojo.exceptions.InvalidCartException;
-import estorePojo.exceptions.UnknownAccountException;
-import estorePojo.exceptions.UnknownItemException;
+import src.core.data.Cart;
+import src.core.data.Order;
+import src.estorePojo.exceptions.*;
 
 public class ClientImpl implements Runnable {
 

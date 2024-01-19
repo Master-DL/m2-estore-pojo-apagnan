@@ -1,15 +1,16 @@
-package estore.services.interfaces.src.core.services;
+package src.core.services;
 
-	import java.util.HashMap;
+import src.core.data.Cart;
+import src.core.data.ItemInStock;
+import src.core.data.Order;
+import src.estorePojo.exceptions.*;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-	import estore.services.interfaces.src.core.data.Cart;
-	import estorePojo.exceptions.InsufficientBalanceException;
-import estorePojo.exceptions.InvalidCartException;
-import estorePojo.exceptions.UnknownAccountException;
-import estorePojo.exceptions.UnknownItemException;
+
 
 public class StoreImpl implements Store {
 
@@ -69,7 +70,7 @@ public class StoreImpl implements Store {
 	     *      Either a new cart at each call or the same cart updated.
 	     * 
 	     * @throws UnknownItemException
-	     * @throws MismatchClientCartException
+	     * @throws InvalidCartException
 	     *      if the given client does not own the given cart
 	     */
 	    public Cart addItemToCart(

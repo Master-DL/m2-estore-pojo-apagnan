@@ -1,13 +1,13 @@
-package estore.services.interfaces.src.core.data;
+package src.core.data;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import estorePojo.exceptions.UnknownItemException;
+import src.core.services.ClientImpl;
+import src.estorePojo.exceptions.UnknownItemException;
 
 public class Order {
 
@@ -17,7 +17,7 @@ public class Order {
 	/** The index of this order. */
 	private int num;
 
-	private Client client;
+	private ClientImpl client;
 	private Object item;
 	private String address;
 	private String bankAccountRef;
@@ -42,7 +42,7 @@ public class Order {
 		date = new Date();
 	}
 
-	public Order(Client client, String address, String bankAccountRef) {
+	public Order(ClientImpl client, String address, String bankAccountRef) {
 		this();
 		this.client = client;
 		this.address = address;

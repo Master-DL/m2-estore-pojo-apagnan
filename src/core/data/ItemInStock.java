@@ -1,4 +1,6 @@
-package estore.services.interfaces.src.core.data;
+package src.core.data;
+
+import src.core.services.Provider;
 
 public class ItemInStock {
 

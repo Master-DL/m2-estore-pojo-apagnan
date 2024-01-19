@@ -1,7 +1,7 @@
-package estore.services.interfaces.src.core.services;
+package src.core.services;
 
-import estorePojo.exceptions.InsufficientBalanceException;
-import estorePojo.exceptions.UnknownAccountException;
+import src.core.data.Account;
+import src.estorePojo.exceptions.*;
 
 public class BankImpl implements Bank {
 
@@ -21,8 +21,7 @@ public class BankImpl implements Bank {
 		bob.setAmount(100);
 	}
 
-	public void transfert(String from, String to, double amount)
-			throws InsufficientBalanceException, UnknownAccountException {
+	public void transfert(String from, String to, double amount) throws InsufficientBalanceException, UnknownAccountException {
 		Account Afrom = null, Ato = null;
 
 		if (from.equals("E-Store"))

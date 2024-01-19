@@ -1,6 +1,6 @@
-package estore.services.interfaces.src.core.data;
+package src.core.data;
 
-import estore.services.interfaces.src.core.services.ClientImpl;
+import src.core.services.ClientImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class Cart {
         if ( items.containsKey(item) ) {
             // The item has already been put in the cart
             // Increase the number
-            oldQty = ((Integer) items.get(item)).intValue();
+            oldQty = items.get(item);
         }
         items.put( item, qty+oldQty );
     }

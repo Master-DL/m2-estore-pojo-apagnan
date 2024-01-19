@@ -1,12 +1,6 @@
-package main;
+package src.main;
 
-import estore.services.interfaces.src.core.services.BankImpl;
-import estore.services.interfaces.src.core.services.ClientImpl;
-import estore.services.interfaces.src.core.services.ProviderImpl;
-import estore.services.interfaces.src.core.services.StoreImpl;
-import estore.services.interfaces.src.core.services.Provider;
-import estore.services.interfaces.src.core.services.Bank;
-import estore.services.interfaces.src.core.services.Store;
+import src.core.services.*;
 
 public class Main {
 

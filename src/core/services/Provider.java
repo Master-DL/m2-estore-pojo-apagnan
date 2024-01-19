@@ -1,4 +1,6 @@
-package estore.services.interfaces.src.core.services;
+package src.core.services;
+
+import src.estorePojo.exceptions.*;
 
 public interface Provider {
 
@@ -8,7 +10,7 @@ public interface Provider {
      * @param item
      * @return
      */
-    double getPrice(Object item) throws estorePojo.exceptions.UnknownItemException;
+    double getPrice(Object item) throws UnknownItemException;
 
     /**
      * Emit an order for items. The provider returns the delay for delivering the
@@ -19,5 +21,5 @@ public interface Provider {
      * @param qty   the quantity ordered
      * @return the delay (in hours)
      */
-    int order(StoreImpl store, Object item, int qty) throws estorePojo.exceptions.UnknownItemException;
+    int order(StoreImpl store, Object item, int qty) throws UnknownItemException;
 }

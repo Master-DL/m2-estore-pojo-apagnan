@@ -1,4 +1,4 @@
-package estorePojo.exceptions;
+package src.estorePojo.exceptions;
 
 public class UnknownAccountException extends Exception {
     

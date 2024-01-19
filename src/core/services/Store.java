@@ -1,15 +1,17 @@
-package estore.services.interfaces.src.core.services;
+package src.core.services;
 
-import estore.services.interfaces.src.core.data.Cart;
+import src.core.data.Cart;
+import src.core.data.Order;
+import src.estorePojo.exceptions.*;
 
 public interface Store {
 
     /**
      * @param item  a given item
      * @return      the price of a given item
-     * @throws estorePojo.exceptions.UnknownItemException
+     * @throws UnknownItemException
      */
-    double getPrice( Object item ) throws estorePojo.exceptions.UnknownItemException;
+    double getPrice( Object item ) throws UnknownItemException;
 
     /**
      * @param item  a given item
@@ -19,7 +21,7 @@ public interface Store {
      *      directly from the store
      *      i.e. without having to re-order it from the provider
      */
-    boolean isAvailable( Object item, int qty ) throws estorePojo.exceptions.UnknownItemException;
+    boolean isAvailable( Object item, int qty ) throws UnknownItemException;
 
     /**
      * Add an item to a cart.
@@ -34,8 +36,8 @@ public interface Store {
      *      Implementation dependant.
      *      Either a new cart at each call or the same cart updated.
      *
-     * @throws estorePojo.exceptions.UnknownItemException
-     * @throws MismatchClientCartException
+     * @throws UnknownItemException
+     * @throws InvalidCartException
      *      if the given client does not own the given cart
      */
     Cart addItemToCart(
@@ -43,7 +45,7 @@ public interface Store {
             ClientImpl client,
             Object item,
             int qty )
-            throws estorePojo.exceptions.UnknownItemException, estorePojo.exceptions.InvalidCartException;
+            throws UnknownItemException, InvalidCartException;
 
 
     /**
@@ -55,12 +57,12 @@ public interface Store {
      * @param bankAccountRef
      * @return  the order
      *
-     * @throws estorePojo.exceptions.UnknownItemException
+     * @throws UnknownItemException
      */
-    Order pay( Cart cart, String address, String bankAccountRef )
+    Order pay(Cart cart, String address, String bankAccountRef )
             throws
-            estorePojo.exceptions.InvalidCartException, estorePojo.exceptions.UnknownItemException,
-            estorePojo.exceptions.InsufficientBalanceException, estorePojo.exceptions.UnknownAccountException;
+            InvalidCartException, UnknownItemException,
+            InsufficientBalanceException, UnknownAccountException;
 
     /**
      * Used by a client to order an item.
@@ -75,9 +77,9 @@ public interface Store {
      * @param bankAccountRef
      * @return  the order
      *
-     * @throws estorePojo.exceptions.UnknownItemException
-     * @throws estorePojo.exceptions.InsufficientBalanceException
-     * @throws estorePojo.exceptions.UnknownAccountException
+     * @throws UnknownItemException
+     * @throws InsufficientBalanceException
+     * @throws UnknownAccountException
      */
     Order oneShotOrder(
             ClientImpl client,
@@ -87,22 +89,10 @@ public interface Store {
             String bankAccountRef
     )
             throws
-            estorePojo.exceptions.UnknownItemException,
-            estorePojo.exceptions.InsufficientBalanceException, estorePojo.exceptions.UnknownAccountException;
+            UnknownItemException,
+            InsufficientBalanceException, UnknownAccountException;
 
-    /**
-     * Treat an item ordered by a client and update the corresponding order.
-     *
-     * @param order
-     * @param item
-     * @param qty
-     * @return
-     *
-     * @throws estorePojo.exceptions.UnknownItemException
-     * @throws estorePojo.exceptions.InsufficientBalanceException
-     * @throws estorePojo.exceptions.UnknownAccountException
-     */
-    void treatOrder( Order order, Object item, int qty ) throws estorePojo.exceptions.UnknownItemException;
+
 
     String toString();
 }
