@@ -12,7 +12,7 @@ import java.util.Set;
 
 
 
-public class StoreImpl implements Store {
+public class StoreImpl implements Store, StoreClientView {
 
 	    private Provider provider;
 	    private Bank bank;
@@ -69,7 +69,6 @@ public class StoreImpl implements Store {
 	     *      Implementation dependant.
 	     *      Either a new cart at each call or the same cart updated.
 	     * 
-	     * @throws UnknownItemException
 	     * @throws InvalidCartException
 	     *      if the given client does not own the given cart
 	     */
@@ -78,7 +77,7 @@ public class StoreImpl implements Store {
 	            ClientImpl client,
 	            Object item,
 	            int qty )
-	    throws UnknownItemException, InvalidCartException {
+	    throws InvalidCartException {
 	        
 	        if ( cart == null ) {
 	            // If no cart is provided, create a new one
@@ -98,42 +97,42 @@ public class StoreImpl implements Store {
 	    /**
 	     * Once all the items have been added to the cart,
 	     * this method finish make the payment
-	     *  
+	     *
 	     * @param cart
 	     * @param address
 	     * @param bankAccountRef
 	     * @return  the order
-	     * 
+	     *
 	     * @throws UnknownItemException
 	     */
 	    public Order pay( Cart cart, String address, String bankAccountRef )
 	    throws
 	    InvalidCartException, UnknownItemException,
 	    InsufficientBalanceException, UnknownAccountException {
-	        
+
 	        if ( cart == null )
 	            throw new InvalidCartException("Cart shouldn't be null");
-	        
+
 	        // Create a new order
 	        Order order = new Order( cart.getClient(), address, bankAccountRef );
 	        orders.put(order.getKey(), order );
-	        
+
 	        // Order all the items of the cart
 	        Set entries = cart.getItems().entrySet();
 	        for (Iterator iter = entries.iterator(); iter.hasNext();) {
 	            Map.Entry entry = (Map.Entry) iter.next();
 	            Object item = entry.getKey();
 	            int qty = ((Integer) entry.getValue()).intValue();
-	            
-	            treatOrder(order,item,qty);            
+
+	            treatOrder(order,item,qty);
 	        }
 	        double amount = order.computeAmount();
-	        
+
 	        // Make the payment
 	        // Throws InsuffisiantBalanceException if the client account is
 	        // not sufficiently balanced
 	        bank.transfert(bankAccountRef,toString(),amount);
-	        
+
 	        return order;
 	    }
 
@@ -156,14 +155,14 @@ public class StoreImpl implements Store {
 	     * The whole process of ordering is encapsulated by this method.
 	     * If several items need to be ordered, this method needs to be
 	     * called several times, but the items will appear in separate orders.
-	     * 
+	     *
 	     * @param client
 	     * @param item
 	     * @param qty
 	     * @param address
 	     * @param bankAccountRef
 	     * @return  the order
-	     * 
+	     *
 	     * @throws UnknownItemException
 	     * @throws InsufficientBalanceException
 	     * @throws UnknownAccountException
@@ -175,23 +174,21 @@ public class StoreImpl implements Store {
 	            String address,
 	            String bankAccountRef
 	    )
-	    throws
-	    UnknownItemException,
-	    InsufficientBalanceException, UnknownAccountException {
-	        
+	    throws UnknownItemException, InsufficientBalanceException, UnknownAccountException {
+
 	        // Create a new order
 	        Order order = new Order( client, address, bankAccountRef );
 	        orders.put(order.getKey(), order );
-	        
+
 	        // Treat the item ordered
 	        treatOrder(order,item,qty);
 	        double amount = order.computeAmount();
-	        
+
 	        // Make the payment
 	        // Throws InsuffisiantBalanceException if the client account is
 	        // not sufficiently balanced
 	        bank.transfert(bankAccountRef,toString(),amount);
-	        
+
 	        return order;
 	    }
 	    
@@ -204,8 +201,6 @@ public class StoreImpl implements Store {
 	     * @return
 	     * 
 	     * @throws UnknownItemException
-	     * @throws InsufficientBalanceException
-	     * @throws UnknownAccountException
 	     */
 	    private void treatOrder( Order order, Object item, int qty )
 	    throws UnknownItemException {

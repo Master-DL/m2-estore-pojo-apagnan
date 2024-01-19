@@ -6,9 +6,9 @@ import src.estorePojo.exceptions.*;
 
 public class ClientImpl implements Runnable {
 
-    private Store store;
+    private StoreClientView store;
 
-    public ClientImpl(Store s){
+    public ClientImpl(StoreClientView s){
     	store = s;
     }
     // -----------------------------------------------------
@@ -32,8 +32,7 @@ public class ClientImpl implements Runnable {
         System.out.println();
     }
     
-    private void scenario1(
-            String item, int qty, String address, String account ) {
+    private void scenario1(String item, int qty, String address, String account ) {
         
         try {
             _scenario1(item,qty,address,account);
@@ -44,11 +43,8 @@ public class ClientImpl implements Runnable {
         }        
     }
     
-    private void _scenario1(
-            String item, int qty, String address, String account )
-    throws
-    UnknownItemException,
-    InsufficientBalanceException, UnknownAccountException{
+    private void _scenario1(String item, int qty, String address, String account )
+    throws UnknownItemException, InsufficientBalanceException, UnknownAccountException{
         
         System.out.println("Ordering "+qty+" "+item+" for "+account+"...");
         Order order = store.oneShotOrder(this,item,qty,address,account);
@@ -67,11 +63,8 @@ public class ClientImpl implements Runnable {
         }        
     }
     
-    private void _scenario2(
-            String[] items, int[] qties, String address, String account )
-    throws
-    InsufficientBalanceException, UnknownAccountException,
-    UnknownItemException, InvalidCartException{
+    private void _scenario2(String[] items, int[] qties, String address, String account )
+    throws InsufficientBalanceException, UnknownAccountException, UnknownItemException, InvalidCartException{
     	
         System.out.println("Ordering for "+account+"...");
         Cart cart = null;
