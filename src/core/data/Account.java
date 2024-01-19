@@ -1,4 +1,4 @@
-package core;
+package estore.services.interfaces.src.core.data;
 
 import estorePojo.exceptions.InsufficientBalanceException;
 
