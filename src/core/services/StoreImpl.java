@@ -14,8 +14,8 @@ import java.util.Set;
 
 public class StoreImpl implements Store {
 
-	    private ProviderImpl provider;
-	    private BankImpl bank;
+	    private Provider provider;
+	    private Bank bank;
 
 	    /**
 	     * Constructs a new StoreImpl

@@ -6,7 +6,7 @@ import src.estorePojo.exceptions.*;
 
 public class ClientImpl implements Runnable {
 
-    private StoreImpl store;
+    private Store store;
 
     public ClientImpl(Store s){
     	store = s;
