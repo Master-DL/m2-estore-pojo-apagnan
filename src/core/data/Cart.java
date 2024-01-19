@@ -1,6 +1,6 @@
 package estore.services.interfaces.src.core.data;
 
-import estore.services.interfaces.src.core.services.Client;
+import estore.services.interfaces.src.core.services.ClientImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,13 +8,13 @@ import java.util.Map;
 public class Cart {
     
     /** The client owning the cart. */
-    private final Client client;
+    private final ClientImpl client;
     
     /** The items currently added to the cart. key=item, value=quantity. */
     private Map<Object,Integer> items = new HashMap<>();
     
     
-    public Cart(Client client) {
+    public Cart(ClientImpl client) {
         this.client = client;
     }
     
@@ -32,7 +32,7 @@ public class Cart {
         return items;
     }
 
-	public Client getClient() {
+	public ClientImpl getClient() {
 		return client;
 	}
 }
